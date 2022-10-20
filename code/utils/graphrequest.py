@@ -2,7 +2,7 @@ from utils.gitquerys import getFirstQuery
 import requests
 import json
 
-pageSize = 100
+pageSize = 10
 limitData = 1000
 
 
@@ -13,6 +13,7 @@ def callGitApiPaginated(url):
     data = []
 
     while(hasNext and len(data) < limitData):
+
         resultOfApi = callGitByPage(url, page)
 
         if (resultOfApi):
@@ -29,7 +30,7 @@ def callGitByPage(url, page):
 
     result = requests.post(url,
                            headers={
-                               'Authorization': 'bearer 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'},
+                               'Authorization': 'bearer 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'},
                            json={'query': query}
                            ) 
     print("Result status from request - ", result.status_code)

@@ -5,7 +5,7 @@ def getPage(page) :
 def getFirstQuery(size, page):
     return """
       {
-        search(query: "stars:>100", type: REPOSITORY, first: """ + str(size) + """, after: """ + getPage(page) + """) {
+        search(query: "stars:>100 language:Java", type: REPOSITORY, first: """ + str(size) + """, after: """ + getPage(page) + """) { 
           pageInfo {
             hasNextPage
             endCursor
