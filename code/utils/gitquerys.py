@@ -5,7 +5,7 @@ def getPage(page) :
 def getFirstQuery(size, page):
     return """
       {
-        search(query: "stars:>100 language:Java", type: REPOSITORY, first: """ + str(size) + """, after: """ + getPage(page) + """) { 
+        search(query: "stars:>100 language:Typescript", type: REPOSITORY, first: """ + str(size) + """, after: """ + getPage(page) + """) { 
           pageInfo {
             hasNextPage
             endCursor
@@ -22,21 +22,16 @@ def getFirstQuery(size, page):
               stargazers {
                 totalCount
               }
-              pullRequests(states: MERGED) {
-                totalCount
-              }
-              releases {
+              pullRequests {
                 totalCount
               }
               totalIssues: issues {
                 totalCount
               }
-              closedIssues: issues(states: CLOSED) {
-                totalCount
-              }
+              forkCount
             }
           }
         }
       }
 
-""" 
+"""  

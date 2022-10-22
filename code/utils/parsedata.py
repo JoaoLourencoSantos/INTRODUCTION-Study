@@ -5,17 +5,13 @@ def parseDataTables(data):
 
     result = []
     for value in data:    
-        singleResult    =  ResultModel.toJson(
-            value['id'],
-            value['nameWithOwner'],
-            value['createdAt'],
-            value['updatedAt'],
+        singleResult    =  ResultModel.toJson( 
+            value['nameWithOwner'], 
             value['primaryLanguage'],
             value['stargazers'],
-            value['pullRequests'],
-            value['releases'],
+            value['pullRequests'], 
             value['totalIssues'],
-            value['closedIssues'] 
+            value['forkCount'] 
         )
   
         result.append(singleResult)

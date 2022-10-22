@@ -5,27 +5,21 @@ from utils.dateutils import calcRate, dateWithIso, dateWithoutHours, diferenceIn
 
 class ResultModel:
             
-    def toJson(id, nameWithOwner, createdAt, updatedAt, primaryLanguage, stargazers, pullRequests, releases, totalIssues, closedIssues):
+    def toJson(nameWithOwner, primaryLanguage, stargazers, pullRequests, totalIssues, forks): 
 
-        currentDate = getCurrentDate()
-        lastUpdate = dateWithIso(updatedAt)
-        isoCreatedAt = dateWithIso(createdAt)
-
+        totalForks = forks if forks else 0
+        totalStars = stargazers['totalCount'] if stargazers else 0
         totalIssues = totalIssues['totalCount'] if totalIssues else 0
-        closedIssues = closedIssues['totalCount'] if closedIssues else 0
+        totalPullRequests = pullRequests['totalCount'] if pullRequests else 0 
 
-        return {
-            "HashId": id,
-            "ProjectName": nameWithOwner,
-            "UpdateAt": dateWithoutHours(updatedAt),
-            "TimeToUpdate": diferenceInDays(lastUpdate, currentDate),
-            "CreatedAt": dateWithoutHours(createdAt),
-            "Age": diferenceInDays(isoCreatedAt, currentDate),
+        engagement = (totalIssues + totalPullRequests + totalForks) / 3
+
+        return { 
+            "ProjectName": nameWithOwner,  
             "PrimaryLanguage": primaryLanguage['name'] if primaryLanguage else "-",
-            "Stargazers": stargazers['totalCount'] if stargazers else "0",
-            "TotalOfPullRequests": pullRequests['totalCount'] if pullRequests else "0",
-            "TotalOfReleases": releases['totalCount'] if releases else "0",
+            "Stars": totalStars,
+            "TotalOfPullRequests": totalPullRequests,
             "TotalOfIssues": totalIssues,
-            "TotalOfClosedIssues": closedIssues,
-            "RateOfIssues": calcRate(closedIssues,  totalIssues)
+            "TotalOfForks": totalForks,
+            "Engagement": engagement,
         }

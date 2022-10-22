@@ -2,7 +2,7 @@ from utils.gitquerys import getFirstQuery
 import requests
 import json
 
-pageSize = 10
+pageSize = 50
 limitData = 1000
 
 
@@ -30,7 +30,7 @@ def callGitByPage(url, page):
 
     result = requests.post(url,
                            headers={
-                               'Authorization': 'bearer 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'},
+                               'Authorization': 'bearer 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'},
                            json={'query': query}
                            ) 
     print("Result status from request - ", result.status_code)
